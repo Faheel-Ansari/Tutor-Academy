@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
-echo "Running composer"
-composer install --no-dev --working-dir=/var/www/html
+
+echo "Running post-deploy tasks..."
+
+# Run package discovery now that live environment variables are active
+php artisan package:discover --ansi
 
 echo "Caching config..."
 php artisan config:cache

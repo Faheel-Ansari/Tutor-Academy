@@ -1,9 +1,14 @@
 FROM richarvey/nginx-php-fpm:latest
 
-COPY . .
+# Copy application files
+COPY . /var/www/html
 
 # Fix permissions for Laravel storage and cache
 RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Install dependencies during the BUILD phase (saves RAM and speeds up startup)
+# We use --no-scripts to prevent Laravel from attempting database connections during build time
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts --working-dir=/var/www/html
 
 # Image configuration
 ENV SKIP_COMPOSER 1
