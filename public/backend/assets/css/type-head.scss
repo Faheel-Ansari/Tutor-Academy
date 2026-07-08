@@ -1,0 +1,121 @@
+@import "bourbon";
+
+/* OPTIONS */
+$width: 300px;
+
+$c-black: #111;
+$c-white: #fff;
+$c-blues: #2980B9, #0074D9, #009FE3;
+$c-greys: #343C3F, #A2ACB0, #D9E1E4;
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: #fff;
+  color: nth($c-greys, 2);
+}
+/* STYLES */
+section {
+  width: $width;
+  display: block;
+  margin: 50px auto;
+  text-align: center;
+}
+h1 {
+  font-size: 36px;
+  font-weight: 300;
+  color: nth($c-greys, 1);
+  margin-bottom: 1em;
+}
+.dropdown {
+  text-align: left;
+  color: nth($c-greys, 1);
+  border: 1px solid nth($c-greys, 2);
+  
+  &.closed {
+    .dropdown-menu {
+      margin-top: 0px;
+      li {
+        height: 0px;
+      }
+    }
+    .title {
+      border-bottom: none;
+      &:after {
+        margin-top: -16px;
+        @include transform(rotate(0deg));
+      }
+    }
+  }
+  
+.title {
+    width: 100%;
+    position: relative;
+    height: 40px;
+    padding: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid nth($c-greys, 3);
+    
+    
+    &:after {
+      display: block;
+      content: "▾";
+      position: absolute;
+      right: 14px;
+      margin-top: -16px;
+      @include transform(rotate(180deg));
+    }
+  }
+  
+  .dropdown-menu {
+    position: relative;
+    overflow: auto;
+    max-height: 200px;
+    @include transition(all 0.2s);
+    @include box-sizing("border-box");
+  }
+  ul {
+    position: absolute;
+    top: 30px;
+    width: 100%;
+    
+    li {
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      border-bottom: 1px solid nth($c-greys, 3);
+      padding: 0 12px;
+      vertical-align: top;
+      overflow: hidden;
+      cursor: pointer;
+      @include transition(margin-top 0.5s, height 0.5s);
+      
+      &:hover {
+        background-color: nth($c-greys, 3);
+        color: nth($c-greys, 1);
+      }
+      
+      &.is-selected {
+        background-color: #009FE3;
+      }
+      
+      &.is-hidden {
+        height: 0;
+        padding: 0;
+        margin: 0;
+        border: none;
+      }
+    }
+  }
+  .typeahead {
+    width: 100%;
+    padding: 5px;
+    position:absolute;
+    z-index: 100;
+  }
+}
